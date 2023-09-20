@@ -109,7 +109,6 @@ function Home() {
           return (
             <div
               key={ id }
-              data-testid="product-detail-link"
             >
               <Link
                 to={ `/product/${id}` }
