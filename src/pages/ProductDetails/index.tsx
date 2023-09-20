@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { getProductById } from '../../services/api';
 
 type ProductType = {
-  title: string;
-  thumbnail: string;
-  price: number;
+  title: string,
+  price: number,
+  thumbnail: string,
+  id: string,
 };
 
 function ProductDetails() {
@@ -14,6 +15,7 @@ function ProductDetails() {
     title: '',
     thumbnail: '',
     price: 0,
+    id: '',
   });
   const { id } = useParams();
   const productApi = async () => {
@@ -22,7 +24,31 @@ function ProductDetails() {
     return productData;
   };
   productApi();
-  console.log(product);
+
+  const counter = 1;
+  const handleAddToCart = () => {
+    const productsList = JSON.parse(localStorage.getItem('cartList') || '[]');
+
+    const productItem = {
+      id: product.id,
+      title: product.title,
+      thumbnail: product.thumbnail,
+      price: product.price,
+      counter,
+    };
+
+    if (productsList.some((item: ProductType) => item.id === product.id)) {
+      const newList = productsList;
+      const index = newList.indexOf(newList
+        .find((item: ProductType) => item.id === product.id));
+      newList[index].counter += 1;
+
+      localStorage.setItem('cartList', JSON.stringify(newList));
+    } else {
+      localStorage.setItem('cartList', JSON.stringify([...productsList, productItem]));
+    }
+  };
+
   return (
     <>
       <h1>
@@ -51,9 +77,14 @@ function ProductDetails() {
           {' '}
           Carrinho
           {' '}
-
         </button>
       </label>
+      <button
+        data-testid="product-detail-add-to-cart"
+        onClick={ () => handleAddToCart() }
+      >
+        Adicionar ao carrinho
+      </button>
     </>
 
   );
