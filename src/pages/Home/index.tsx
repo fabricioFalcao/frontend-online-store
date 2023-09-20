@@ -83,14 +83,18 @@ function Home() {
       ) : (
         searchedValue.map(({ id, title, thumbnail, price }) => {
           return (
-            <div
+            <Link
+              to={ `/product/${id}` }
               key={ id }
-              data-testid="product"
             >
-              <h2>{ title }</h2>
-              <img src={ thumbnail } alt={ title } />
-              <p>{ price }</p>
-            </div>
+              <div
+                data-testid="product"
+              >
+                <h2>{ title }</h2>
+                <img src={ thumbnail } alt={ title } />
+                <p>{ price }</p>
+              </div>
+            </Link>
           );
         })
       )}
