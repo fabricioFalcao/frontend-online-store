@@ -37,6 +37,30 @@ function Home() {
     setSearchedValue(productsPerCategory.results);
   };
 
+  const counter = 1;
+  const handleAddToCart = ({ id, title, thumbnail, price }: ProductType) => {
+    const productsList = JSON.parse(localStorage.getItem('cartList') || '[]');
+
+    const product = {
+      id,
+      title,
+      thumbnail,
+      price,
+      counter,
+    };
+
+    if (productsList.some((item: ProductType) => item.id === product.id)) {
+      const newList = productsList;
+      const index = newList.indexOf(newList
+        .find((item: ProductType) => item.id === product.id));
+      newList[index].counter += 1;
+
+      localStorage.setItem('cartList', JSON.stringify(newList));
+    } else {
+      localStorage.setItem('cartList', JSON.stringify([...productsList, product]));
+    }
+  };
+
   return (
     <div>
       <div>
@@ -70,32 +94,42 @@ function Home() {
           </button>
         </label>
       </div>
-
+      <Link to="/cart" data-testid="shopping-cart-button">
+        <h1>Para o Carrinho</h1>
+      </Link>
       { searchedValue.length === 0 ? (
         <div>
           <h1 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <h1>Para o Carrinho</h1>
-          </Link>
+
         </div>
       ) : (
         searchedValue.map(({ id, title, thumbnail, price }) => {
           return (
-            <Link
-              to={ `/product/${id}` }
+            <div
               key={ id }
               data-testid="product-detail-link"
             >
-              <div
-                data-testid="product"
+              <Link
+                to={ `/product/${id}` }
+                data-testid="product-detail-link"
               >
-                <h2>{ title }</h2>
-                <img src={ thumbnail } alt={ title } />
-                <p>{ price }</p>
-              </div>
-            </Link>
+                <div
+                  data-testid="product"
+                >
+                  <h2>{ title }</h2>
+                  <img src={ thumbnail } alt={ title } />
+                  <p>{ price }</p>
+                </div>
+              </Link>
+              <button
+                data-testid="product-add-to-cart"
+                onClick={ () => handleAddToCart({ id, title, thumbnail, price }) }
+              >
+                Adicionar ao carrinho
+              </button>
+            </div>
           );
         })
       )}
