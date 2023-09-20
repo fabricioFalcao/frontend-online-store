@@ -86,6 +86,7 @@ function Home() {
             <Link
               to={ `/product/${id}` }
               key={ id }
+              data-testid="product-detail-link"
             >
               <div
                 data-testid="product"
