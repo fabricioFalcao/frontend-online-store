@@ -32,6 +32,11 @@ function Home() {
     setSearchedValue(productsCategoryData.results);
   };
 
+  const handleFilterCategorie = async (category: string) => {
+    const productsPerCategory = await getProductsFromCategoryAndQuery(category, '');
+    setSearchedValue(productsPerCategory.results);
+  };
+
   return (
     <div>
       <div>
@@ -40,6 +45,7 @@ function Home() {
             <button
               key={ id }
               data-testid="category"
+              onClick={ () => handleFilterCategorie(id) }
             >
               {name}
             </button>
