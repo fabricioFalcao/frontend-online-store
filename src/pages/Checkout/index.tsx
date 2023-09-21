@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 function Checkout() {
   const navigate = useNavigate();
   const [isChecked, setIsChecked] = useState(false);
-  const [localStorageState, setLocalStorageState] = useState([]);
+  const [localStorageState, setLocalStorageState] = useState([{
+    title: '',
+    thumbnail: '',
+    id: '',
+  }]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,7 +54,7 @@ function Checkout() {
           Revise os seus produtos:
         </h1>
         {localStorageState
-          .map((product: string) => (
+          .map((product) => (
             <>
               <h3 key={ product.id }>{`${product.title}`}</h3>
               <img
