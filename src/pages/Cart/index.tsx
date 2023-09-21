@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type ProductType = {
   title: string,
@@ -10,7 +10,7 @@ type ProductType = {
 
 function ShoppingCart() {
   const [productList, setMyProductList] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cartList') || '[]');
     setMyProductList(cart);
@@ -121,6 +121,14 @@ function ShoppingCart() {
           );
         })
       )}
+      <div>
+        <button
+          data-testid="checkout-products"
+          onClick={ () => navigate('/checkout') }
+        >
+          Finalizar Compra
+        </button>
+      </div>
     </div>
   );
 }
