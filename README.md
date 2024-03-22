@@ -2,7 +2,7 @@
 
 👨‍💻 **What was developed**
 
-In this project, we will create a simplified version, without database persistence, of an online store, developing its functionalities in a group according to defined demands on a Kanban board, in a scenario close to that of the job market.
+In this project, we created a simplified version, without database persistence, of an online store, developing its functionalities in a group according to defined demands on a Kanban board, in a scenario close to that of the job market.
 
 Based on these demands, an application will be developed where users will be able to:
 
