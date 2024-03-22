@@ -26,3 +26,13 @@ In this project, we will:
 - React.js
 - Mercado Livre API
 - Kanban or Scrum
+
+  <hr>
+
+  ### My Project Partners:
+
+- Fabio Rodrigues: [GitHub](https://github.com/FabioRodriguesT)
+- Victor Guilherme: [GitHub](https://github.com/VictorGuilhermesc)
+- Gabriela Lubarino: [GitHub](https://github.com/GabrielaLubarino)
+- Lucas Coutinho: [GitHub](https://github.com/coutinhol7)
+
